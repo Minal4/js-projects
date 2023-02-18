@@ -90,3 +90,90 @@ function dictionarySearch() {
 }
 
 dictionarySearch();
+
+
+// QUOTE GENERATOR
+
+function quoteGen() {
+    const data = quotes;
+    const quoteBtn = document.querySelector('.quote-btn');
+    const author = document.querySelector('.author');
+    const quotePlace = document.querySelector('.quote-placement');
+    quoteBtn.addEventListener('click', function () {
+        randomQuote = Math.floor(Math.random() * data.length)
+        quotePlace.innerText = data[randomQuote].quote
+        author.innerText = `~ ${data[randomQuote].author} ~`
+    });
+}
+
+quoteGen();
+
+// NOTE APP
+
+function noteApp() {
+    const lists = document.querySelector('.note-lists');
+    const btn = document.querySelector('.add-btn');
+
+
+    // ADD NOTE
+    const addNote = (text = "") => {
+        const list = document.createElement('div');
+        list.classList.add('list');
+        list.innerHTML = `
+        <div class="single-list relative ">
+        <div class="editable-btns absolute right-0 top-0 flex gap-2">
+        <button class="save w-auto bg-black text-white px-4 py-2"> save</button>
+        <button class="delete w-auto bg-black text-white px-4 py-2">
+        Delete
+        </button>
+        </div>
+        <div class="index">
+        </div>
+        <textarea class="pt-10 px-4" style="height: 250px; width:100%" placeholder='Enter text...'>${text}</textarea>
+        </div>
+        `
+        let del = list.querySelector('.delete');
+        del.addEventListener('click', function () {
+            list.remove()
+            saveNote()
+        })
+        let save = list.querySelector('.save');
+        save.addEventListener('click', saveNote)
+        lists.appendChild(list);
+        saveNote()
+    }
+
+    const saveNote = () => {
+        const notes = lists.querySelectorAll('.list textarea')
+        const data = [];
+        notes.forEach((note) => {
+            data.push(note.value);
+        })
+
+        if (data.length === 0) {
+            localStorage.removeItem("notes")
+        } else {
+            localStorage.setItem("notes", JSON.stringify(data))
+        }
+    }
+
+    (
+        function () {
+            const lsNotes = JSON.parse(localStorage.getItem("notes"));
+            if (lsNotes === null) {
+                addNote()
+            } else {
+                lsNotes.forEach(
+                    (lsNote) => {
+                        addNote(lsNote)
+                    }
+                )
+            }
+
+        }
+    )()
+    btn.addEventListener('click', addNote)
+
+}
+
+noteApp()
