@@ -77,15 +77,18 @@ function dictionarySearch() {
     }
 
     searchInput.addEventListener('keyup', function (e) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && e.target.value !== '') {
             fetchApi(e.target.value);
+            searchInput.value = ''
         }
     })
 
     btn.addEventListener('click', function (e) {
         e.preventDefault();
-        fetchApi(searchInput.value);
-
+        if (searchInput.value !== '') {
+            fetchApi(searchInput.value);
+            searchInput.value = ''
+        }
     })
 }
 
@@ -177,3 +180,70 @@ function noteApp() {
 }
 
 noteApp()
+
+// GITHUB PROFILES
+
+const profile = () => {
+    const searchBox = document.querySelector('.search-box');
+    const searchInput = document.querySelector('.search-field');
+
+    const APIURL = "https://api.github.com/users/";
+
+    const fetchApi = async (name) => {
+        const res = await fetch(`${APIURL}${name}`)
+        const data = await res.json();
+        const card =
+            `
+            <div class="card flex flex-col sm:flex-row gap-4 ">
+                <div class="basis-full md:basis-1/4">
+                    <img class="avatar" src=${data.avatar_url} alt="Florin Pop">
+                </div>
+                <div class="user-info basis-full md:basis-3/4">
+                    <h2>${data.name}</h2>
+                    <p>${data.bio}</p>
+                    <ul class="info flex gap-4 mb-5">
+                        <li class="flex gap-2">${data.followers} <strong>Followers</strong></li>
+                        <li class="flex gap-2">${data.following} <strong>Following</strong></li>
+                        <li class="flex gap-2">${data.public_repos} <strong>Repos</strong></li>
+                    </ul>
+                    <div id="repos">
+            
+                    </div>
+                </div>
+            </div>
+        `
+        searchBox.innerHTML = card
+        repoApi(name)
+    }
+
+    const searchProfile = () => {
+        fetchApi(searchInput.value);
+    }
+
+    searchInput.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter' && e.target.value !== '') {
+            searchProfile()
+        }
+    })
+
+    fetchApi('bhagirath-wscubetech');
+
+    const repoApi = async (name) => {
+        const repos = document.getElementById('repos');
+        const repoLink = await fetch(`${APIURL}${name}/repos`);
+        const data = await repoLink.json();
+        console.log(data)
+        data.forEach((item) => {
+            const anchor = document.createElement('a');
+            anchor.classList.add('anchor')
+            anchor.href = item.html_url;
+            anchor.target = "_blank";
+            anchor.innerText = item.name
+            repos.appendChild(anchor)
+        })
+
+    }
+}
+
+
+profile();
