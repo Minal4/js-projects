@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS projects</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            transition: 0.5s ease-in-out;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            text-transform: uppercase;
+            background-attachment: fixed;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+        }
+
+        .navbar {
+            transition: 1s;
+            transform: translateY(0);
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar.fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            animation: scroll 0.5s ease-in-out forwards;
+        }
+
+        .links {
+            top: -100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.5s ease-in-out
+        }
+
+        .show-toggle {
+            top: 100%;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media screen and (min-width:640px) {
+            .links {
+                opacity: 1;
+                visibility: visible;
+                top: 0;
+            }
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        section:nth-child(even) {
+            background-color: #f2f5f8;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="bg-gray-800 navbar">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+                    <!-- Mobile menu button-->
+                    <button type="button"
+                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-hamburger toggle"></i>
+                    </button>
+                </div>
+                <div class="flex flex-1 items-center justify-between sm:items-stretch">
+                    <div class="flex flex-shrink-0 items-center">
+                        <img class="block h-8 w-auto lg:hidden"
+                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                        <img class="hidden h-8 w-auto lg:block"
+                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                    </div>
+                    <div
+                        class="sm:ml-6 flex justify-end links sm:relative absolute top-full w-full p-4 sm:bg-transparent bg-green-500 sm:top-0">
+                        <div class="flex sm:flex-row flex-col w-full gap-4 sm:justify-end">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a href="#team"
+                                class="text-white sm:bg-transparent p-4 sm:w-auto w-full bg-black hover:bg-gray-700 hover:text-white rounded-md sm:px-3 sm:py-2 text-sm font-medium">Team</a>
+
+                            <a href="#projects"
+                                class="text-white sm:bg-transparent p-4 sm:w-auto w-full max-sm:mx-0 bg-black hover:bg-gray-700 hover:text-white rounded-md sm:px-3 sm:py-2 text-sm font-medium">Projects</a>
+
+                            <a href="#calendar"
+                                class="text-white sm:bg-transparent p-4 sm:w-auto w-full bg-black hover:bg-gray-700 hover:text-white rounded-md sm:px-3 sm:py-2 text-sm font-medium">Calendar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="back p-5 uppercase bg-gray-800 w-auto cursor-pointer inline-block text-white">Back</div>
+
+    <div class="">
+        <div class="wrapper">
+            <section class="section text-white" style="background: url('./images/team.jpg');" id="team">Team</section>
+            <section class="section text-white" style="background: url('./images/project.jpg');" id="projects">Projects
+            </section>
+            <section class="section text-white" style="background: url('./images/calendar.jpg');" id="calendar">Calendar
+            </section>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS projects</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div class="back p-5 uppercase bg-gray-800 w-auto cursor-pointer">Back</div>
+
+    <div class="my-5 flex-1 items-center justify-center flex-col flex h-screen">
+        <div class="bg-gray-500 p-5 mx-auto text-center">
+            <header class="h-screen w-full">
+                <video controls muted loop class="video-container">
+                    <source src="./video.mp4" type="video/mp4" />
+                </video>
+                <h1>video project</h1>
+                <!-- video switch -->
+                <button class="switch-btn flex gap-3 justify-center">
+                    <span class="bg-black text-white py-2 px-4 play">
+                        play
+                    </span>
+                    <span class="bg-black text-white py-2 px-4 pause">
+                        pause
+                    </span>
+                    <span class="switch"></span>
+                </button>
+            </header>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
