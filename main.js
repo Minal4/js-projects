@@ -11,7 +11,6 @@ const colorFlip = () => {
             let number = Math.floor(Math.random() * data.length);
             wrapper.style.backgroundColor = data[number];
             colorValue.innerText = data[number]
-            console.log(number, 'asd')
         })
     }
 }
@@ -256,18 +255,157 @@ const loremFunc = () => {
     let loremBtn = document.querySelector('.lorem-form .btn');
     let article = document.querySelector('.lorem-text');
     let numInput = document.querySelector('.lorem-form input');
-    loremBtn.addEventListener('click', function (e) {
-        e.preventDefault()
-        if (numInput.value === '') {
-            let randomNumber = Math.floor(Math.random() * text.length)
-            article.innerText = text[randomNumber]
-        } else {
-            temText = text.slice(0, numInput.value)
-            article.innerHTML = temText.map((item) => {
-                return `<p>${item}</p>`
-            }).join('')
-        }
-    })
+    if (loremBtn !== null) {
+        loremBtn.addEventListener('click', function (e) {
+            e.preventDefault()
+            if (numInput.value === '') {
+                let randomNumber = Math.floor(Math.random() * text.length)
+                article.innerText = text[randomNumber]
+            } else {
+                temText = text.slice(0, numInput.value)
+                article.innerHTML = temText.map((item) => {
+                    return `<p>${item}</p>`
+                }).join('')
+            }
+        })
+    }
 }
 
 loremFunc()
+
+// GROCERY
+
+const groceryFunc = () => {
+    let list = document.querySelector('.grocery-list')
+    let submitBtn = document.querySelector('.submit-btn')
+    let form = document.querySelector('.grocery-form')
+    let groceryInput = document.getElementById('grocery')
+    let datas = []
+    let editFlag = false
+    let editElement
+
+    if (groceryInput !== null) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault()
+            let value = groceryInput.value;
+            if (value !== '' && !editFlag) {
+                const id = new Date().getTime().toString();
+                let newItem = document.createElement('div');
+                let attr = document.createAttribute("data-id");
+                attr.value = id;
+                newItem.setAttributeNode(attr);
+                newItem.classList.add('new-item', 'flex', 'justify-between')
+
+                newItem.innerHTML = `
+            <p class="title">${groceryInput.value}</p>
+            <div class="btn-container">
+                <!-- edit btn -->
+                <button type="button" class="edit-btn">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <!-- delete btn -->
+                <button type="button" class="delete-btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>`
+                list.appendChild(newItem)
+                // datas.push(
+                //     newItem
+                // )
+                // datas.map((data) => {
+                //     return list.appendChild(data)
+                // })
+                groceryInput.value = ''
+                addToLocalStorage(id, value);
+                editToLocalStorage(id, value);
+
+                const deleteBtn = newItem.querySelector(".delete-btn");
+                deleteBtn.addEventListener("click", function (e) {
+                    list.removeChild(newItem)
+                });
+                const editBtn = newItem.querySelector(".edit-btn");
+                editBtn.addEventListener("click", function (e) {
+                    editElement = e.currentTarget.parentElement.previousElementSibling;
+                    groceryInput.focus()
+                    groceryInput.value = editElement.innerText
+                    submitBtn.innerText = 'Edit'
+                    editFlag = true
+                });
+            } else if (value !== '' && editFlag) {
+                editElement.innerHTML = value
+                submitBtn.innerHTML = 'submit'
+            }
+        })
+
+        // add to local storage
+        function addToLocalStorage(id, value) {
+            const grocery = { id, value };
+            let items = getLocalStorage();
+            items.push(grocery);
+            localStorage.setItem("list", JSON.stringify(items));
+        }
+        // edit to local storage
+        function editToLocalStorage(id, value) {
+            let data = getLocalStorage()
+            data.map((item, index) => {
+                if (id === item.id) {
+                    item.value = value
+                }
+                return item
+            })
+            submitBtn.innerHTML = 'submit'
+            localStorage.setItem("list", JSON.stringify(data));
+        }
+
+        function getLocalStorage() {
+            return localStorage.getItem("list")
+                ? JSON.parse(localStorage.getItem("list"))
+                : [];
+        }
+
+    }
+}
+
+groceryFunc();
+
+// Slider
+
+const sliderFunc = () => {
+    let container = document.querySelector('.slider-container');
+    let sliders = container.querySelectorAll('.slide')
+    let prevBtn = document.querySelector('.prevBtn')
+    let nextBtn = document.querySelector('.nextBtn')
+    let index = 0;
+    sliders.forEach(function (slide, i) {
+        slide.style.left = `${i * 100}%`;
+    });
+    prevBtn.addEventListener('click', () => {
+        if (index <= 0) {
+            index = sliders.length - 1
+        } else {
+            index--
+        }
+        console.log(index)
+        carousel()
+    })
+    nextBtn.addEventListener('click', () => {
+        if (index >= sliders.length - 1) {
+            index = 0
+        } else {
+            index++
+        }
+        carousel()
+        console.log(index)
+    })
+
+    function carousel() {
+        sliders.forEach((slide, i) => {
+
+            slide.style.transform = `translateX(-${index * 100}%)`;
+
+        })
+    }
+
+}
+
+sliderFunc()
