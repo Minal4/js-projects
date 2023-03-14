@@ -3,16 +3,26 @@ const data = ['#fff', '#000', 'red'];
 // FOR COLOR FLIPPER
 
 const colorFlip = () => {
-    const btn = document.querySelector('.btn');
-    let wrapper = document.querySelector('.bg-color');
-    let colorValue = document.querySelector('.value');
-    if (btn !== null && wrapper !== null) {
-        btn.addEventListener('click', function () {
-            let number = Math.floor(Math.random() * data.length);
-            wrapper.style.backgroundColor = data[number];
-            colorValue.innerText = data[number]
+    const colors = ['047200', 'f2f5f8', '333']
+    let bgColor = document.querySelector('.bg-color')
+    let colorValue = document.querySelector('.value')
+    let colorBtn = document.querySelector('.btn')
+    if (colorBtn !== null) {
+        colorBtn.addEventListener('click', () => {
+            let flipRandomValue = Math.floor(Math.random() * colors.length)
+            bgColor.style.backgroundColor = `#${colors[flipRandomValue]}`
+            colorValue.innerHTML = `#${colors[flipRandomValue]}`
+
+        })
+
+        colorValue.addEventListener('click', async () => {
+            let copy = colorValue.innerHTML
+            console.log(copy)
+            navigator.clipboard.writeText(copy)
+            alert(`copied the following text ${copy}`)
         })
     }
+
 }
 
 colorFlip()
@@ -25,26 +35,34 @@ back.addEventListener('click', function () {
 // FOR COUNTER
 
 const counter = () => {
-    let counterValue = document.querySelector('.counter-value');
-    let minus = document.querySelector('.minus');
-    let plus = document.querySelector('.plus');
+    let counterBtns = document.querySelectorAll('button')
+    let counterValue = document.querySelector('.counter-value')
 
+    counterBtns.forEach((counterBtn) => {
+        counterBtn.addEventListener('click', () => {
+            switch (counterBtn.textContent) {
+                case 'Decrement': decrement()
+                    break;
+                case 'Increment': increment()
+                    break;
+                default: return
+            }
+        })
 
-    const decrement = () => {
-        if (counterValue.innerText > 0) {
-            counterValue.innerText--
+        const decrement = () => {
+            if (counterValue.textContent <= 0) {
+                counterValue.textContent = 0
+                alert(`can't go below 0`)
+            } else {
+                counterValue.textContent--
+            }
         }
-    }
 
-    const increment = () => {
-        counterValue.innerText++
-    }
+        const increment = () => {
+            counterValue.textContent++
+        }
+    })
 
-
-    if (minus !== null && plus !== null) {
-        plus.addEventListener('click', increment);
-        minus.addEventListener('click', decrement);
-    }
 }
 
 counter();
@@ -83,46 +101,45 @@ let reviews = [
 ];
 
 const reviewFunc = () => {
+
     let info = document.querySelector('.info')
-    let job = document.querySelector('.job')
+    let authorJob = document.querySelector('.job')
     let author = document.querySelector('.author')
     let personImg = document.querySelector('.person-img')
     let randomBtn = document.querySelector('.random-btn')
     let btns = document.querySelectorAll('.review-btn')
-    let reviewIndex = 0;
+    let reviewIndex = 0
     function showPerson() {
-        let item = reviews[reviewIndex];
-        info.textContent = item.text;
-        author.textContent = item.name;
-        job.textContent = item.job;
-        personImg.src = item.img;
+        const { name, job, img, text } = reviews[reviewIndex]
+        info.innerHTML = text
+        authorJob.innerHTML = job
+        personImg.src = img
+        author.innerHTML = name
     }
+    const randomFunc = () => {
+        reviewIndex = Math.floor(Math.random() * reviews.length)
+        showPerson(reviewIndex)
+    }
+    randomBtn.addEventListener('click', randomFunc)
 
-    btns.forEach((revBtn) => {
-        revBtn.addEventListener('click', function (e) {
-            let curTarget = e.currentTarget.classList;
-            if (curTarget.contains('prev-btn')) {
-                reviewIndex--;
+    btns.forEach((reviewBtn) => {
+        reviewBtn.addEventListener('click', function () {
+            if (reviewBtn.classList.contains('prev-btn')) {
+                reviewIndex--
                 if (reviewIndex < 0) {
-                    reviewIndex = reviews.length - 1;
+                    reviewIndex = reviews.length - 1
                 }
                 showPerson(reviewIndex)
-            } else if (curTarget.contains('next-btn')) {
-                reviewIndex++;
-                if (reviewIndex > reviews.length) {
-                    reviewIndex = 0;
+            } else if (reviewBtn.classList.contains('next-btn')) {
+                reviewIndex++
+                if (reviewIndex >= reviews.length) {
+                    reviewIndex = 0
+                } else {
                 }
                 showPerson(reviewIndex)
             }
         })
     })
-
-    if (randomBtn !== null) {
-        randomBtn.addEventListener('click', function () {
-            reviewIndex = Math.floor(Math.random() * reviews.length)
-            showPerson(reviewIndex)
-        })
-    }
 }
 
 reviewFunc()
@@ -372,40 +389,42 @@ groceryFunc();
 
 const sliderFunc = () => {
     let container = document.querySelector('.slider-container');
-    let sliders = container.querySelectorAll('.slide')
+    let sliders = document.querySelectorAll('.slide')
     let prevBtn = document.querySelector('.prevBtn')
     let nextBtn = document.querySelector('.nextBtn')
     let index = 0;
-    sliders.forEach(function (slide, i) {
-        slide.style.left = `${i * 100}%`;
-    });
-    prevBtn.addEventListener('click', () => {
-        if (index <= 0) {
-            index = sliders.length - 1
-        } else {
-            index--
-        }
-        console.log(index)
-        carousel()
-    })
-    nextBtn.addEventListener('click', () => {
-        if (index >= sliders.length - 1) {
-            index = 0
-        } else {
-            index++
-        }
-        carousel()
-        console.log(index)
-    })
 
-    function carousel() {
-        sliders.forEach((slide, i) => {
-
-            slide.style.transform = `translateX(-${index * 100}%)`;
-
+    if (container !== null) {
+        sliders.forEach(function (slide, i) {
+            slide.style.left = `${i * 100}%`;
+        });
+        prevBtn.addEventListener('click', () => {
+            if (index <= 0) {
+                index = sliders.length - 1
+            } else {
+                index--
+            }
+            console.log(index)
+            carousel()
         })
-    }
+        nextBtn.addEventListener('click', () => {
+            if (index >= sliders.length - 1) {
+                index = 0
+            } else {
+                index++
+            }
+            carousel()
+            console.log(index)
+        })
 
+        function carousel() {
+            sliders.forEach((slide, i) => {
+
+                slide.style.transform = `translateX(-${index * 100}%)`;
+
+            })
+        }
+    }
 }
 
 sliderFunc()

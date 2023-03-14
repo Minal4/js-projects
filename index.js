@@ -232,7 +232,6 @@ const profile = () => {
         const repos = document.getElementById('repos');
         const repoLink = await fetch(`${APIURL}${name}/repos`);
         const data = await repoLink.json();
-        console.log(data)
         data.forEach((item) => {
             const anchor = document.createElement('a');
             anchor.classList.add('anchor')
