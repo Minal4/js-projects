@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feedback UI</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="quotes.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Feedback UI</title>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="quotes.js"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            clifford: '#da373d',
+                        }
                     }
                 }
             }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
+        </script>
+        <style type="text/tailwindcss">
+            @layer utilities {
               .content-auto {
                 content-visibility: auto;
               }
@@ -29,96 +29,99 @@
           </style>
 
 
-</head>
+    </head>
 
-<body>
-    <!-- FEEDBACK -->
-    <div class=" my-5 flex-1 items-center justify-center flex h-screen gap-2 flex-wrap">
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="flipper.html">FLIPPER PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="counter.html">Counter PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="review.html">Review PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="faq.html">FAQ PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="video.html">Video PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="navbar.html">Navbar PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="tabs.html">Tabs PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="lorem.html">Lorem PROJECT</a>
-        <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="grocery.html">Grocery PROJECT</a>
-    </div>
-    <div class="wrapper">
-        <div class="containers" id="container">
-            <h1 class="heading">Feedback UI</h1>
-            <div class="ratings-container" id="ratings-container">
-                <div class="rating">
-                    <img src="https://cdn-icons-png.flaticon.com/512/166/166527.png" />
-                    <small>Unhappy</small>
-                </div>
-                <div class="rating">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1791/1791385.png" />
-                    <small>Neutral</small>
-                </div>
-                <div class="rating">
-                    <img src="https://cdn-icons-png.flaticon.com/512/166/166538.png" />
-                    <small>Satisfied</small>
-                </div>
-            </div>
-            <button class="btn bg-lime-300 hover:bg-lime-500" id="btn">Send Review</button>
+    <body>
+        <!-- FEEDBACK -->
+        <div class=" my-5 flex-1 items-center justify-center flex h-screen gap-2 flex-wrap">
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="flipper.html">FLIPPER PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="counter.html">Counter PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="review.html">Review PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="faq.html">FAQ PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="video.html">Video PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="navbar.html">Navbar PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="tabs.html">Tabs PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="lorem.html">Lorem PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="grocery.html">Grocery PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="slider.html ">Slider PROJECT</a>
+            <a class="bg-gray-400 p-5 rounded-lg hover:bg-orange-500" href="calculator.html">Calculator PROJECT</a>
         </div>
-    </div>
-    <!-- FEEDBACK ENDS -->
-
-    <!-- ENGLISH DICTIONARY -->
-    <div class="max-w-2xl bg-slate-400 text-white mx-auto text-center p-4 shadow-md">
-        <h1 class="heading">English Dictionary</h1>
-        <div class="form flex justify-center flex-col gap-2 max-w-lg m-auto">
-            <input type="text" class="py-2 px-4 text-black search-input">
-            <div class="content">
-                <div class="show"></div>
-                <div class="inner-content">
-                    <div><strong>Meaning:</strong> <span class="meaning"></span></div>
-                    <br>
-                    <div><strong>Synonym:</strong> <span class="syn"></span>
+        <div class="wrapper">
+            <div class="containers" id="container">
+                <h1 class="heading">Feedback UI</h1>
+                <div class="ratings-container" id="ratings-container">
+                    <div class="rating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/166/166527.png" />
+                        <small>Unhappy</small>
+                    </div>
+                    <div class="rating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1791/1791385.png" />
+                        <small>Neutral</small>
+                    </div>
+                    <div class="rating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/166/166538.png" />
+                        <small>Satisfied</small>
                     </div>
                 </div>
+                <button class="btn bg-lime-300 hover:bg-lime-500" id="btn">Send Review</button>
             </div>
+        </div>
+        <!-- FEEDBACK ENDS -->
+
+        <!-- ENGLISH DICTIONARY -->
+        <div class="max-w-2xl bg-slate-400 text-white mx-auto text-center p-4 shadow-md">
+            <h1 class="heading">English Dictionary</h1>
+            <div class="form flex justify-center flex-col gap-2 max-w-lg m-auto">
+                <input type="text" class="py-2 px-4 text-black search-input">
+                <div class="content">
+                    <div class="show"></div>
+                    <div class="inner-content">
+                        <div><strong>Meaning:</strong> <span class="meaning"></span></div>
+                        <br>
+                        <div><strong>Synonym:</strong> <span class="syn"></span>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="bg-lime-300 hover:bg-lime-500 text-white w-auto py-2 px-4 rounded-md search-btn">Search</button>
+            </div>
+        </div>
+        <!-- ENGLISH DISTIONARY ENDS -->
+        <!-- QUOTE GENERATOR -->
+        <div class="max-w-2xl bg-slate-300 mx-auto my-10 p-6 text-center shadow-md">
+            <h1 class="heading">Quotes</h1>
+            <blockquote class="quote-placement">
+
+            </blockquote>
+            <div class="author italic font-sans text-sm font-bold"></div>
             <button
-                class="bg-lime-300 hover:bg-lime-500 text-white w-auto py-2 px-4 rounded-md search-btn">Search</button>
+                class="quote-btn rounded-md bg-lime-300 hover:bg-lime-500 px-5 py-3 my-4 text-white inline-block mx-auto align-center">Generate</button>
         </div>
-    </div>
-    <!-- ENGLISH DISTIONARY ENDS -->
-    <!-- QUOTE GENERATOR -->
-    <div class="max-w-2xl bg-slate-300 mx-auto my-10 p-6 text-center shadow-md">
-        <h1 class="heading">Quotes</h1>
-        <blockquote class="quote-placement">
+        <!-- QUOTE GENERATOR ENDS -->
 
-        </blockquote>
-        <div class="author italic font-sans text-sm font-bold"></div>
-        <button
-            class="quote-btn rounded-md bg-lime-300 hover:bg-lime-500 px-5 py-3 my-4 text-white inline-block mx-auto align-center">Generate</button>
-    </div>
-    <!-- QUOTE GENERATOR ENDS -->
+        <!-- NOTE APP -->
 
-    <!-- NOTE APP -->
+        <div class="note-app bg-amber-100 p-8 relative">
+            <h1 class="heading text-center ">Note App</h1>
+            <button
+                class="add-btn w-auto bg-lime-300 hover:bg-lime-500 text-white rounded-md absolute right-2 top-2 px-6 py-4  hover:bg-sky-500 transition-all duration-50 ease-in-out">Add
+                Note</button>
+            <div class="note-lists grid sm:grid-cols-3 gap-5">
 
-    <div class="note-app bg-amber-100 p-8 relative">
-        <h1 class="heading text-center ">Note App</h1>
-        <button
-            class="add-btn w-auto bg-lime-300 hover:bg-lime-500 text-white rounded-md absolute right-2 top-2 px-6 py-4  hover:bg-sky-500 transition-all duration-50 ease-in-out">Add
-            Note</button>
-        <div class="note-lists grid sm:grid-cols-3 gap-5">
-
+            </div>
         </div>
-    </div>
 
-    <!-- NOTE APP ENDS -->
+        <!-- NOTE APP ENDS -->
 
-    <!-- GITHUB PROFILE -->
-    <div class="search-container max-w-2xl mx-auto bg-amber-100 shadow-md mt-6 p-8">
-        <h1 class="heading text-center">GITHUB PROFILE</h1>
-        <input type="text" class="search-field py-2 px-4 text-black w-full" placeholder="Search for github user..">
-        <div class="search-box my-6">
+        <!-- GITHUB PROFILE -->
+        <div class="search-container max-w-2xl mx-auto bg-amber-100 shadow-md mt-6 p-8">
+            <h1 class="heading text-center">GITHUB PROFILE</h1>
+            <input type="text" class="search-field py-2 px-4 text-black w-full" placeholder="Search for github user..">
+            <div class="search-box my-6">
+            </div>
         </div>
-    </div>
-    <script src="index.js"></script>
-</body>
+        <script src="index.js"></script>
+        <script src="main.js"></script>
+    </body>
 
 </html>

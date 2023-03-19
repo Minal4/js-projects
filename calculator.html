@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS projects</title>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap');
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .button {
+                width: 66px;
+                padding: 20px;
+                margin: 0 3px;
+                transition: all 0.3s ease-in;
+                border: 2px solid black;
+                border-radius: 9px;
+                cursor: pointer;
+            }
+
+            .row {
+                margin: 8px 0;
+            }
+
+            .row input {
+                width: 291px;
+                font-size: 20px;
+                margin: 0;
+                padding: 10px 0px;
+                border: 2px solid black;
+                border-radius: 5px;
+            }
+
+            .active,
+            .button:focus,
+            .active:focus {
+                border: 2px solid transparent;
+                box-shadow: inset 0 0 3px 4px rgb(0 0 0 / 14%);
+                animation: zoom 0.5s ease-in-out forwards
+            }
+
+            @keyframes zoom {
+                from {
+                    transform: scale(0.8);
+                }
+
+                to {
+                    transform: scale(1);
+                }
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="back p-5 uppercase bg-gray-800 w-auto cursor-pointer text-white text-center">Back</div>
+
+        <div class="my-5 flex-1 items-center justify-center flex-col flex h-screen">
+            <div class="container flex flex-col items-center mx-auto m-w-20">
+                <div class="row">
+                    <input class="input" type="text" />
+                </div>
+                <div class="row">
+                    <button class="button">C</button>
+                    <button class="button">%</button>
+                    <button class="button">M+</button>
+                    <button class="button">M-</button>
+                </div>
+                <div class="row">
+                    <button class="button">7</button>
+                    <button class="button">8</button>
+                    <button class="button">9</button>
+                    <button class="button">*</button>
+                </div>
+                <div class="row">
+                    <button class="button">4</button>
+                    <button class="button">5</button>
+                    <button class="button">6</button>
+                    <button class="button">/</button>
+                </div>
+                <div class="row">
+                    <button class="button">1</button>
+                    <button class="button">2</button>
+                    <button class="button">3</button>
+                    <button class="button">+</button>
+                </div>
+                <div class="row">
+                    <button class="button">0</button>
+                    <button class="button">.</button>
+                    <button class="button">=</button>
+                    <button class="button">-</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+
+</html>

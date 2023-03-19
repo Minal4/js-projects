@@ -7,7 +7,7 @@ const colorFlip = () => {
     let bgColor = document.querySelector('.bg-color')
     let colorValue = document.querySelector('.value')
     let colorBtn = document.querySelector('.btn')
-    if (colorBtn !== null) {
+    if (colorBtn !== null && colorValue !== null) {
         colorBtn.addEventListener('click', () => {
             let flipRandomValue = Math.floor(Math.random() * colors.length)
             bgColor.style.backgroundColor = `#${colors[flipRandomValue]}`
@@ -116,30 +116,33 @@ const reviewFunc = () => {
         personImg.src = img
         author.innerHTML = name
     }
-    const randomFunc = () => {
-        reviewIndex = Math.floor(Math.random() * reviews.length)
-        showPerson(reviewIndex)
-    }
-    randomBtn.addEventListener('click', randomFunc)
 
-    btns.forEach((reviewBtn) => {
-        reviewBtn.addEventListener('click', function () {
-            if (reviewBtn.classList.contains('prev-btn')) {
-                reviewIndex--
-                if (reviewIndex < 0) {
-                    reviewIndex = reviews.length - 1
+    if (randomBtn !== null) {
+        const randomFunc = () => {
+            reviewIndex = Math.floor(Math.random() * reviews.length)
+            showPerson(reviewIndex)
+        }
+        randomBtn.addEventListener('click', randomFunc)
+
+        btns.forEach((reviewBtn) => {
+            reviewBtn.addEventListener('click', function () {
+                if (reviewBtn.classList.contains('prev-btn')) {
+                    reviewIndex--
+                    if (reviewIndex < 0) {
+                        reviewIndex = reviews.length - 1
+                    }
+                    showPerson(reviewIndex)
+                } else if (reviewBtn.classList.contains('next-btn')) {
+                    reviewIndex++
+                    if (reviewIndex >= reviews.length) {
+                        reviewIndex = 0
+                    } else {
+                    }
+                    showPerson(reviewIndex)
                 }
-                showPerson(reviewIndex)
-            } else if (reviewBtn.classList.contains('next-btn')) {
-                reviewIndex++
-                if (reviewIndex >= reviews.length) {
-                    reviewIndex = 0
-                } else {
-                }
-                showPerson(reviewIndex)
-            }
+            })
         })
-    })
+    }
 }
 
 reviewFunc()
@@ -148,22 +151,15 @@ reviewFunc()
 
 const faqFunc = () => {
     const questions = document.querySelectorAll('.question');
-    questions.forEach((article) => {
-        let title = article.querySelector('.question-title');
-        title.addEventListener('click', function () {
+    questions.forEach((ques) => {
+        let questionTitle = ques.querySelector('.question-title');
+        questionTitle.addEventListener('click', () => {
             questions.forEach((item) => {
-                let text = item.querySelector('.question-text')
-                let minus = item.querySelector('.minus-icon')
-                let plus = item.querySelector('.plus-icon')
-                if (item !== article) {
-                    text.style.display = 'none'
-                    plus.style.display = 'block'
-                    minus.style.display = 'none'
+                let answer = item.querySelector('.question-text');
+                if (ques === item) {
+                    answer.style.display = 'block'
                 } else {
-                    plus.style.display = 'none'
-                    minus.style.display = 'block'
-                    text.style.display = 'block'
-
+                    answer.style.display = 'none'
                 }
             })
         })
@@ -269,18 +265,20 @@ const loremFunc = () => {
         `Man braid celiac synth freegan readymade, pitchfork fam salvia waistcoat lomo bitters gentrify four loko. Pitchfork semiotics post-ironic vegan. Tofu meditation microdosing hashtag semiotics venmo. Flexitarian vape tilde taiyaki. Prism poutine farm-to-table, messenger bag vegan taxidermy tattooed sartorial squid jean shorts fixie selvage trust fund vape.`,
         `Rutters Plate Fleet boom chandler Brethren of the Coast handsomely lookout marooned brigantine knave. Buccaneer gangway jack rum loot spyglass line Jack Tar fore gaff. Gaff topmast scuttle ballast swab draught measured fer yer chains dance the hempen jig Chain Shot yardarm.`,
     ];
-    let loremBtn = document.querySelector('.lorem-form .btn');
-    let article = document.querySelector('.lorem-text');
-    let numInput = document.querySelector('.lorem-form input');
+
+    let amount = document.getElementById('amount');
+    let loremBtn = document.querySelector('.btn');
+    let loremText = document.querySelector('.lorem-text');
     if (loremBtn !== null) {
-        loremBtn.addEventListener('click', function (e) {
+        loremBtn.addEventListener('click', (e) => {
+            let randomLorem = Math.floor(Math.random() * text.length)
+            let amountNum = amount.value;
             e.preventDefault()
-            if (numInput.value === '') {
-                let randomNumber = Math.floor(Math.random() * text.length)
-                article.innerText = text[randomNumber]
+            if (amountNum === '' || amountNum == 0) {
+                loremText.innerHTML = text[randomLorem]
             } else {
-                temText = text.slice(0, numInput.value)
-                article.innerHTML = temText.map((item) => {
+                let generateLorem = text.slice(0, amountNum);
+                loremText.innerHTML = generateLorem.map(item => {
                     return `<p>${item}</p>`
                 }).join('')
             }
@@ -388,43 +386,75 @@ groceryFunc();
 // Slider
 
 const sliderFunc = () => {
-    let container = document.querySelector('.slider-container');
-    let sliders = document.querySelectorAll('.slide')
-    let prevBtn = document.querySelector('.prevBtn')
-    let nextBtn = document.querySelector('.nextBtn')
-    let index = 0;
+    let sldierContainer = document.querySelector('.slider-container');
+    let slides = document.querySelectorAll('.slide');
+    let slideBtn = document.querySelectorAll('button');
+    slides.forEach((slide, ind) => {
+        slide.style.left = `${ind * 100}%`
+    })
+    let nextValue = 0;
 
-    if (container !== null) {
-        sliders.forEach(function (slide, i) {
-            slide.style.left = `${i * 100}%`;
-        });
-        prevBtn.addEventListener('click', () => {
-            if (index <= 0) {
-                index = sliders.length - 1
+    const slideSwitch = (e) => {
+        let valueBtn = e.target.classList;
+        if (valueBtn.contains('prevBtn')) {
+            if (nextValue <= 0) {
+                nextValue = slides.length - 1
             } else {
-                index--
-            }
-            console.log(index)
-            carousel()
-        })
-        nextBtn.addEventListener('click', () => {
-            if (index >= sliders.length - 1) {
-                index = 0
-            } else {
-                index++
+                nextValue--
             }
             carousel()
-            console.log(index)
-        })
-
-        function carousel() {
-            sliders.forEach((slide, i) => {
-
-                slide.style.transform = `translateX(-${index * 100}%)`;
-
-            })
+        } else if (valueBtn.contains('nextBtn')) {
+            if (nextValue >= slides.length - 1) {
+                nextValue = 0
+            } else {
+                nextValue++
+            }
+            carousel()
         }
     }
+    const carousel = () => {
+        slides.forEach((item, index) => {
+            item.style.transform = `translateX(-${nextValue * 100}%)`;
+        })
+    }
+
+    slideBtn.forEach((btn) => {
+        btn.addEventListener('click', slideSwitch)
+
+    })
 }
 
 sliderFunc()
+
+// Calculator 
+
+const calFunc = () => {
+    let string = ''
+    let resultInput = document.querySelector('.input')
+    let buttons = document.querySelectorAll('.button')
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            buttons.forEach((item) => {
+                if (button === item) {
+                    item.classList.add('active')
+                } else {
+                    item.classList.remove('active')
+                }
+            })
+            if (e.target.innerHTML == '=') {
+                string = eval(string)
+                resultInput.value = string
+                string = ''
+            } else if (e.target.innerHTML === 'C') {
+                resultInput.value = ''
+                string = ''
+            } else {
+                string = string + e.target.innerHTML
+                resultInput.value = string
+            }
+        })
+    })
+
+}
+
+calFunc()
